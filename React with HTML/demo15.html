@@ -1,0 +1,110 @@
+<html>
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.js"></script>
+	<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+	
+	<style>
+		input[type=text], select {
+			width: 100%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		input[type=submit] {
+			width: 100%;
+			background-color: #4CAF50;
+			color: white;
+			padding: 14px 20px;
+			margin: 8px 0;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+
+		input[type=submit]:hover {
+			background-color: #45a049;
+		}
+
+		div {
+			border-radius: 5px;
+			background-color: #f2f2f2;
+			padding: 20px;
+		}
+	</style>
+
+	<script type="text/babel">
+		class TestComponent extends React.Component {
+			constructor(props){
+				super(props);
+				var states = [
+					{ value: 'del', display: 'Delhi', country: 1 },
+					{ value: 'tel', display: 'Telangana', country: 1 },
+					{ value: 'jer', display: 'New Jersey', country: 2 }
+				];
+				this.state = {
+					countries: [
+						{ value: 1, display: 'India' },
+						{ value: 2, display: 'United States' },
+						{ value: 3, display: 'United Kingdom' },
+						{ value: 4, display: 'France' }
+					],
+					states: states,
+					clonedStates: states
+				}
+			}
+			
+			render() {
+				return <div>
+					<h3>Using CSS to style an HTML Form</h3>
+					<div>
+					  <form action="">
+						<label>First Name</label>
+						<input type="text" id="fname" name="firstname" placeholder="Your name.." />
+
+						<label>Last Name</label>
+						<input type="text" id="lname" name="lastname" placeholder="Your last name.." />
+
+						<label>Country</label>
+						<select id="country" name="country" onChange={event => {
+							alert('Country Selected');
+							var filteredStates = [];
+							debugger;
+							for(var state of this.state.states){
+								if(state.country == parseInt(event.target.value)) {
+									filteredStates.push(state);
+								}
+							}
+							
+							this.setState({ clonedStates: filteredStates});
+						} }>
+							<option value="0"> Please select Country </option>
+							{this.state.countries.map(country => <option value={country.value}>{country.display}</option>) }
+						</select>
+						<label>State</label>
+						<select id="state" name="state">
+							<option value="0"> Please select State </option>
+							{this.state.clonedStates.map(state => <option value={state.value}>{state.display}</option>) }
+						</select>
+					  
+						<input type="submit" value="Submit" />
+					  </form>
+					</div>
+					</div>;
+			}
+		}
+		
+		function afterRender(){
+			ReactDOM.render(<TestComponent title='Welcome to React Demo' />, document.getElementById('container'));
+		}
+	</script>
+</head>
+<body onLoad="afterRender()">
+	<div id="container">
+	</div>
+</body>
+</html>

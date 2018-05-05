@@ -1,0 +1,252 @@
+var variableName = defaultValue;
+var x = 10;
+Viewing the values inside a variable
+console.log(x); => It prints value to console
+alert(x); => It displays value in alert box
+
+function
+	Block of code 
+	Code is added for reusability and easy to distribute
+
+// Syntax 
+function functionName(arguments) { 
+	// return statement if needed.
+}
+
+function subtraction(x, y) {
+	// x, y are like arguments
+	x = x || 0;
+	y = y || 0;
+	console.log('x value is ' + x );
+	console.log('y value is ' + y );
+	var z = x - y;
+	return z;
+}
+subtraction(10, 2);
+subtraction(10);
+subtraction(10, 2, 20);
+
+// Arrow function
+subtraction(x, y) => {
+	// x, y are like arguments
+	x = x || 0;
+	y = y || 0;
+	console.log('x value is ' + x );
+	console.log('y value is ' + y );
+	var z = x - y;
+	return z;
+}
+
+Object
+	Its a key value pair
+	key - String => can access using . or []
+	      Number => can access using []
+		  symbols like _ is allowed => var person5 = { first_name: 'Karthik' }
+	value -
+			Primitive - string
+						number
+						boolean
+			function
+			Object
+
+Simple Object
+
+var person = {
+	firstName: 'Arjun',
+	lastName: 'Krishna'
+}
+
+// Accessing Values
+person.firstName
+person['lastName']
+
+// Adding/Updating a key value
+person.age = 20;
+person['city'] = 'Hyderabad';
+
+// Deleting a key
+delete person.city
+delete person['age']
+
+// Object as a value
+person.address = {
+	line1: 'Kukatpally',
+	line2: 'Hyderabad'
+}
+
+var calculator = {
+	addition: function(x, y) {
+		return x + y;
+	},
+	subtraction: function(x, y) {
+		x = x || 0;
+		y = y || 0;
+		return x - y;
+	}
+}
+
+
+function getFullName(fn, ln, age, city) {
+	fn = fn || '';
+	ln = ln || '';
+	age = age || 0;
+	city = city || '';
+	return fn + ln + ", " + age + "," + city;
+}
+
+// Passing Object to function as a single input instead of multiple inputs
+function getFullName(options){
+	options = options || {};
+	options.fn = options.fn || '';
+	options.ln = options.ln || '';
+	options.age = options.age || '';
+	options.city = options.city || '';
+	return options.fn + options.ln + ", " + options.age + "," + options.city;
+}
+
+// Arrays
+var students = ['Krishna', 'Neha', 'Karthik'];
+
+// Adding item to array.
+students.push('Venkat');
+students.push('Kumar');
+
+// Approach 1
+using for 
+for(var index = 0; index < students.length; index ++ ){
+	console.log(index);
+	var student = students[index];
+	console.log(student);
+}
+
+// Approach 2
+using for in => Iteration is done for index
+for(var index in students) {
+	console.log(index);
+	var student = students[index];
+	console.log(student);
+}
+
+// Approach 3
+using for of => Iteration is done for items
+for(var student of students) {
+	console.log(student);
+}
+
+// Approach 4
+using map
+students.map(student => console.log(student));
+
+// Last element is copied to variable and then deleted in that array.
+var lastElement = students.pop();
+
+https://www.w3schools.com/js/js_array_methods.asp
+
+// Array of different elements
+var diff = [1, "Karthik", true, function(x, y) { return x + y; } ]
+
+diff[3] => return f ie function
+diff[3](1, 2)
+
+
+// Creating users(object)
+
+// User 1
+var lakshman = {
+	name: 'Lakshman Reddy',
+	getName: function(){
+		return lakshman.name;
+	},
+	getAge: function(){
+		return 10;
+	} 
+}
+
+// User 2
+var neha = {
+	name: 'Neha Singh',
+	getName: function(){
+		return this.name;
+	},
+	getAge: function(){
+		return 20;
+	} 
+}
+
+console.log(neha.getName() + " has age " + neha.getAge()) 
+
+Class
+	Structure and has no physical values
+	
+	Data Hiding
+	Code Redundancy
+	Inheritance
+	Constructors => Passing values while creating an instance.
+
+Object/Instance =>
+	It is physical example/instance of a Class. 
+	Methods/Fields override in one instance will not affect other instances.
+	
+// Approach for creating a class
+// Syntax
+var className = function() {
+	// private fields/methods
+	// global fields/methods
+	
+	// public fields/methods
+	this.
+}
+var Calculator = function(secretCode){
+	// private method
+	var print = function(result){
+		console.log('Result is ' + result);
+	}
+	
+	// private variable
+	var secret = secretCode;
+	
+	// global variable
+	pi = 3.14;
+	
+
+	// global method
+	getBrowser = function (){
+    	return "Chrome";
+	}
+	
+	// public variable
+	this.version = 1.0;
+	
+	// public method
+	this.add = function(x, y) {
+		var z = x + y;
+		print(z);
+		console.log(secret);
+		return z;
+	}
+	
+	this.sub = function(x, y) {
+		var z = x + y;
+		print(z);
+		console.log(secret);
+		return z;
+	}
+}
+
+var c1 = new Calculator("123");
+c1.add(1,2) => 3
+
+
+Executing functions
+function test(x, y){
+	console.log(this);
+}
+
+// Approach - 1
+test(1, 2) => window
+
+// Approach - 2
+functionName.call( scope, parameters);
+test.call(this, 1, 2 ) => window
+
+test.call({ x:1, y:2}, 2, 4) => { x:1, y:2}
